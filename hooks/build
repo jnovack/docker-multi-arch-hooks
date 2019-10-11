@@ -6,9 +6,7 @@
 echo "[***] Build hook running"
 
 docker build \
-  --build-arg VERSION=$(git describe --tags --always) \
-  --build-arg COMMIT=$(git rev-parse HEAD) \
-  --build-arg URL=$(git config --get remote.origin.url) \
-  --build-arg BRANCH=$(git rev-parse --abbrev-ref HEAD) \
-  --build-arg DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
-  -t $IMAGE_NAME .
+    --build-arg BUILD_RFC3339=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+    --build-arg COMMIT=$(git rev-parse --short HEAD) \
+    --build-arg VERSION=$(git describe --tags --always) \
+    -t $IMAGE_NAME .
