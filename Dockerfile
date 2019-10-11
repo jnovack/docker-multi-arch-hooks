@@ -1,22 +1,22 @@
 FROM scratch
 
-ARG BRANCH="none"
-ARG COMMIT="local-build"
-ARG DATE="1970-01-01T00:00:00Z"
-ARG URL="https://github.com/jnovack/dockerhub-hooks"
+ARG BUILD_RFC3339="1970-01-01T00:00:00Z"
+ARG COMMIT="local"
 ARG VERSION="dirty"
 
-LABEL org.label-schema.schema-version="1.0" \
-    org.label-schema.build-date=$DATE \
-    org.label-schema.vendor="Justin J. Novack" \
-    org.label-schema.name="jnovack/dockerhub-hooks" \
-    org.label-schema.description="Sample Docker Hub Build Hooks" \
-    org.label-schema.version="$VERSION" \
-    org.label-schema.vcs-url=$URL \
-    org.label-schema.vcs-branch=$BRANCH \
-    org.label-schema.vcs-ref=$COMMIT
+STOPSIGNAL SIGKILL
 
-ENV BRANCH "$BRANCH"
+LABEL org.opencontainers.image.ref.name="jnovack/dockerhub-hooks" \
+      org.opencontainers.image.created=$BUILD_RFC3339 \
+      org.opencontainers.image.authors="Justin J. Novack <jnovack@gmail.com>" \
+      org.opencontainers.image.documentation="https://github.com/jnovack/dockerhub-hooks/README.md" \
+      org.opencontainers.image.description="Sample Docker Hub build hooks" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.source="https://github.com/jnovack/dockerhub-hooks" \
+      org.opencontainers.image.revision=$COMMIT \
+      org.opencontainers.image.version=$VERSION \
+      org.opencontainers.image.url="https://hub.docker.com/r/jnovack/dockerhub-hooks/"
+
+ENV BUILD_RFC3339 "$BUILD_RFC3339"
 ENV COMMIT "$COMMIT"
-ENV DATE "$DATE"
 ENV VERSION "$VERSION"
