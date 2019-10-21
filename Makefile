@@ -1,13 +1,13 @@
 .PHONY: build all
 .DEFAULT_GOAL := all
 
+IMAGE?=jnovack/dockerhub-hooks
+
 all: build
 
 build:
-	docker build \
-	--build-arg VERSION=`git describe --tags --always` \
-	--build-arg COMMIT=`git rev-parse HEAD` \
-	--build-arg URL=`git config --get remote.origin.url` \
-	--build-arg BRANCH=`git rev-parse --abbrev-ref HEAD` \
-	--build-arg DATE=`date +%FT%T%z` \
-	-t jnovack/dockerhub-hooks .
+docker build \
+    --build-arg BUILD_RFC3339=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+    --build-arg COMMIT=$(git rev-parse --short HEAD) \
+    --build-arg VERSION=$(git describe --tags --always) \
+    -t $(IMAGE) .
