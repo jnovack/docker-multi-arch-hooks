@@ -18,6 +18,8 @@ When you tag and push v1.2.3 of your repository, the scripts will create a new t
 
 ## How To Use
 
+**Click "Use This Template" on Github, do NOT "Fork".**
+
 In order to use these scripts, you **MUST** tag your commits following [semantic version standards](https://semver.org).
 
 The format is "vMAJOR.MINOR.PATCH" (please note the lowercase "v").  Examples: `v0.0.4`, `v1.0.0`, `v2.0.103`.
