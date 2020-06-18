@@ -1,7 +1,7 @@
 .PHONY: build all
 .DEFAULT_GOAL := all
 
-IMAGE?=jnovack/dockerhub-hooks
+IMAGE?=jnovack/docker-multi-arch-hooks
 
 all: build
 
