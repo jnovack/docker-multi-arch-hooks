@@ -1,26 +1,26 @@
-# Docker Hub Multi-Arch Hooks Example
+# Docker Hub Multi-Arch Hooks Template
 
 [![](https://img.shields.io/badge/Github-Template-blue?style=flat&logo=github)](https://img.shields.io/badge/Github-Template-blue?style=flat&logo=github)
 
-The scripts in this respository are intended to provide auto-updating builds based on tags and automatic building of multi-arch images
+The scripts in this respository are intended to provide auto-updating builds based on tags and automatic building of multi-arch images.
 
-For best practices on Docker Hub, when you push a patch version of your container, you SHOULD be updating the major and minor versions of your release to point to this new build.  Additionally, when pushing a new minor release, you SHOULD be updating the major container version.
+As the practice goes, pulling the tag `:1` of your container, should always pull the most up-to-date release in the `v1` version, be it `v1.3.1` or `v1.99.99`.  If you wanted `v1.0.0` specifically, best practices means you should grab `:1.0.0`. However, if a user always wants `v1.2` and all patches of `v1.2` (e.g. `v1.2.4`, `v1.2.219`), but never `v1.3`, the user MUST download `:1.2`. If someone always wants the latest version, they download `:latest`.
 
-In theory, pulling the tag `:1` of your container, should always pull the most up-to-date release in the `v1` version, be it `v1.3.1` or `v1.99.99`.  If you wanted `v1.0.0` specifically, best practices means you should grab `:1.0.0`. However, if a user always wants `v1.2` and all patches of `v1.2` (e.g. `v1.2.4`, `v1.2.219`), but never `v1.3`, the user MUST download `:1.2`. If someone always wants the latest version, they can download `:latest`.
+For best practices on Docker Hub, when you push a patch (`x.x.PATCH`) version of your container, you SHOULD be updating the major (`MAJOR.x.x`) and minor (`x.MINOR.x`) versions of your release to point to this new build.  Additionally, when pushing a new minor release, you SHOULD be updating the major container version.
 
-When you tag and push `v1.2.3` of your repository, the scripts will create a new tag, `:1.2.3`, for your container.  It will also automatically update `:1.2` and `:1` for you.  Keeping all releases up to date.
+When you tag and push `v1.2.3` of your repository, these scripts will create a new tag, `:1.2.3`, for your container.  It will also automatically update `:1.2` and `:1` for you to this build.  Keeping all releases up to date.
 
 ## Follow My Example
 
 I used this template for my [jnovack/docker-autossh](https://www.github.com/jnovack/docker-autossh) repository, which has automatic builds on Docker Hub for my [jnovack/autossh](https://hub.docker.com/jnovack/autossh) image.
 
-You can `docker pull jnovack/autossh:2.0.0` from a raspberry pi 3 (`arm32v7` architecture), a raspberry pi zero (`arm32v6` architecture), an Amazon AWS instance (`arm64v8` architecture), or a linux or mac desktop (`amd64` architecture).  Each image will find the correct architecture to download, without having to specify different tags.
+Because all of the architectures are in one image tag, you can `docker pull jnovack/autossh:2.0.0` from a raspberry pi 3 (`arm32v7` architecture), a raspberry pi zero (`arm32v6` architecture), an Amazon AWS instance (`arm64v8` architecture), or a linux or mac desktop (`amd64` architecture).  Each image will find the correct architecture to download, without having to specify different tags.  One tag, many architectures.
 
 [![](preview.png)](preview.png)
 
 ## How To Use
 
-1. You MUST click "Use This Template" on Github. DO NOT "Fork" a *template* repository.
+1. You MUST click "Use This Template" on Github.  DO NOT "Fork" a *template* repository.
 2. You SHOULD update and synchronize all your `Dockerfile`s, adding all your commands at the end. Please update the label section.
 3. You MUST tag and push your commits with [semantic versioning standards](https://semver.org).
 
