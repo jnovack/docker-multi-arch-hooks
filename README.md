@@ -12,7 +12,7 @@ When you tag and push `v1.2.3` of your repository, these scripts will create a n
 
 ## Follow My Example
 
-I used this template for my [jnovack/docker-autossh](https://www.github.com/jnovack/docker-autossh) repository, which has automatic builds on Docker Hub for my [jnovack/autossh](https://hub.docker.com/jnovack/autossh) image.
+I used this template for my [jnovack/docker-autossh](https://www.github.com/jnovack/docker-autossh) repository, which has automatic builds on Docker Hub for my [jnovack/autossh](https://hub.docker.com/r/jnovack/autossh) image.
 
 Because all of the architectures are in one image tag, you can `docker pull jnovack/autossh:2.0.0` from a raspberry pi 3 (`arm32v7` architecture), a raspberry pi zero (`arm32v6` architecture), an Amazon AWS instance (`arm64v8` architecture), or a linux or mac desktop (`amd64` architecture).  Each image will find the correct architecture to download, without having to specify different tags.  One tag, many architectures.
 
