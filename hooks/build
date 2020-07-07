@@ -20,7 +20,7 @@ echo "[---] APPLICATION: ${APPLICATION}"
 GITHUB_USERREPO=$(echo "${DOCKER_REPO}" | cut -d '/' -f 2-3)
 
 # Set description from github
-DESCRIPTION=$(shell curl -s https://api.github.com/repos/${GITHUB_USERREPO} \
+DESCRIPTION=$(curl -s https://api.github.com/repos/${GITHUB_USERREPO} \
     | grep '"description".*' \
     | head -n 1 \
     | cut -d '"' -f 4)
