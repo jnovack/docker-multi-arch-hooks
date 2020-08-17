@@ -16,8 +16,11 @@ echo "[---] DOCKER_REPO: ${DOCKER_REPO}"
 echo "[---] IMAGE_NAME: ${IMAGE_NAME}"
 echo "[---] APPLICATION: ${APPLICATION}"
 
-# $(echo "index.docker.io/user/respository" | cut -d '/' -f 2-3) = "user/repository"
-GITHUB_USERREPO=$(echo "${DOCKER_REPO}" | cut -d '/' -f 2-3)
+# $(echo "index.docker.io/user/repository" | cut -d '/' -f 2-3) = "user/repository"
+# otherwise, you will need to set ENVIRONMENT VARIABLES for your build.
+if [ -z $GITHUB_USERREPO ]; then
+    GITHUB_USERREPO=$(echo "${DOCKER_REPO}" | cut -d '/' -f 2-3)
+fi
 
 # Set description from github
 DESCRIPTION=$(curl -s https://api.github.com/repos/${GITHUB_USERREPO} \
