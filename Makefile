@@ -1,7 +1,7 @@
 APPLICATION := $(shell basename `pwd`)
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 BUILD_RFC3339 := $(shell date -u +"%Y-%m-%dT%H:%M:%S+00:00")
-PACKAGE := $(shell git remote get-url --push origin | sed -E 's/.+[@|/](.+)\.(.+).git/\1.\2/' | sed 's/\:/\//')
+PACKAGE := $(shell git remote get-url --push origin | sed -E 's/.+[@|/].+[/|:](.+)\/(.+).git/\1\/\2/')
 REVISION := $(shell git rev-parse HEAD)
 VERSION := $(shell git describe --tags)
 DESCRIPTION := $(shell curl -s https://api.github.com/repos/${PACKAGE} \
@@ -12,7 +12,7 @@ WORKDIR := $(shell pwd)
 
 DOCKER_BUILD_ARGS := \
 	--build-arg APPLICATION=${APPLICATION} \
-	--build-arg BUILD_RFC3339=v${BUILD_RFC3339} \
+	--build-arg BUILD_RFC3339=${BUILD_RFC3339} \
 	--build-arg DESCRIPTION="${DESCRIPTION}" \
 	--build-arg PACKAGE=${PACKAGE} \
 	--build-arg REVISION=${REVISION} \
