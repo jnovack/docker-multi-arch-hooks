@@ -23,9 +23,10 @@ LABEL org.opencontainers.image.ref.name="${PACKAGE}" \
       org.opencontainers.image.version=$VERSION \
       org.opencontainers.image.url="https://hub.docker.com/r/${PACKAGE}/"
 
-ENV APPLICATION "myapp"
-ENV BUILD_RFC3339 "1970-01-01T00:00:00Z"
-ENV REVISION "local"
-ENV DESCRIPTION "no description"
-ENV PACKAGE "user/repo"
-ENV VERSION "dirty"
+ENV \
+      APPLICATION="${APPLICATION}" \
+      BUILD_RFC3339="${BUILD_RFC3339}" \
+      REVISION="${REVISION}" \
+      DESCRIPTION="${DESCRIPTION}" \
+      PACKAGE="${PACKAGE}" \
+      VERSION="${VERSION}"
