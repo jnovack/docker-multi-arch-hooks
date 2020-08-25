@@ -19,7 +19,18 @@ DOCKER_BUILD_ARGS := \
 	--build-arg VERSION=${VERSION} \
 	--progress auto
 
-.PHONY: docker update-hooks
+.PHONY: debug-variables docker update-hooks
+
+.PHONY: debug-variables
+debug-variables:
+	@echo "APPLICATION: ${APPLICATION}"
+	@echo "BRANCH: ${BRANCH}"
+	@echo "BUILD_RFC3339: ${BUILD_RFC3339}"
+	@echo "DESCRIPTION: ${DESCRIPTION}
+	@echo "PACKAGE: ${PACKAGE}"
+	@echo "REVISION: ${REVISION}"
+	@echo "VERSION: ${VERSION}
+	@echo "WORKDIR: ${WORKDIR}
 
 # docker removes and rebuilds the docker container for local development
 docker:
