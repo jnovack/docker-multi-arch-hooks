@@ -43,4 +43,4 @@ update-hooks:
 	curl -Lo hooks/post_checkout https://github.com/jnovack/docker-multi-arch-hooks/raw/master/hooks/post_checkout
 	curl -Lo hooks/post_push https://github.com/jnovack/docker-multi-arch-hooks/raw/master/hooks/post_push
 	curl -Lo variables.mk https://github.com/jnovack/docker-multi-arch-hooks/raw/master/variables.mk
-	curl -Lo variables.mk https://github.com/jnovack/docker-multi-arch-hooks/raw/master/go.mk
+	curl -Lo go.mk https://github.com/jnovack/docker-multi-arch-hooks/raw/master/go.mk
