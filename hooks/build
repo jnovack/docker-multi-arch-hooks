@@ -11,6 +11,7 @@ echo "[***] Build hook starting..."
 # $(echo "index.docker.io/user/respository" | cut -d '/' -f 3) = "repository"
 APPLICATION=$(echo "${DOCKER_REPO}" | cut -d '/' -f 3)
 
+echo "[---] CURRENT WORKING DIRECTORY: $(pwd)"
 echo "[---] DOCKERFILE_PATH: ${DOCKERFILE_PATH}"
 echo "[---] DOCKER_REPO: ${DOCKER_REPO}"
 echo "[---] IMAGE_NAME: ${IMAGE_NAME}"
