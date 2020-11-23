@@ -33,9 +33,16 @@ echo "[---] GITHUB_USERREPO: ${GITHUB_USERREPO}"
 echo "[---] DESCRIPTION: ${DESCRIPTION}"
 
 ## Build all variant images.
-for FILE in ${DOCKERFILE_PATH}.*
+for FILE in ./${DOCKERFILE_PATH}.*
 do
-    TARGET_ARCH=$(echo "${FILE}" | cut -d '.' -f 2)
+    if [ ! -f "${FILE}" ]; then
+        # Break if not actually a file.
+        break;
+    fi
+
+    # TODO: Relative Dockerfile path MUST NOT have a '.' in it
+    echo "[---] Found additional file to build: ${FILE}"
+    TARGET_ARCH=$(echo "${FILE}" | cut -d '.' -f 3)
 
     ## FUDGE Factor because Docker Hub does not respect "32" in os/arch model
     case "$TARGET_ARCH" in
