@@ -1,6 +1,7 @@
 #!/bin/bash
 # hooks/build
 # https://docs.docker.com/docker-cloud/builds/advanced/
+set -x
 
 ## requires to be an architecture+variant as defined by the manifest
 DEFAULT_ARCH="amd64"
