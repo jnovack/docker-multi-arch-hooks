@@ -32,6 +32,10 @@ DESCRIPTION=$(curl -s https://api.github.com/repos/${GITHUB_USERREPO} \
 echo "[---] GITHUB_USERREPO: ${GITHUB_USERREPO}"
 echo "[---] DESCRIPTION: ${DESCRIPTION}"
 
+# Find the build path (permits Dockerfile to be in a sub-directory)
+BUILD_PATH=$(echo ${DOCKERFILE_PATH}| sed 's#/#..#g' | sed 's#[a-zA-Z0-9]\+#/#g' | cut -c 2- )
+echo "[---] BUILD_PATH: ${BUILD_PATH}."
+
 ## Build all variant images.
 for FILE in ./${DOCKERFILE_PATH}.*
 do
@@ -64,7 +68,7 @@ do
     docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
     docker build \
-        --file "${DOCKERFILE_PATH}.${TARGET_ARCH}" \
+        --file $(basename ${FILE}) \
         --build-arg APPLICATION=${APPLICATION} \
         --build-arg BUILD_RFC3339=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
         --build-arg REVISION=$(git rev-parse --short HEAD) \
@@ -72,13 +76,13 @@ do
         --build-arg DESCRIPTION="${DESCRIPTION}" \
         --build-arg VERSION=$(git describe --tags --always) \
         -t ${IMAGE_NAME}_${BUILD_ARCH} \
-        .
+        ${BUILD_PATH}.
 done
 
 
 ## Build the prime image at the end.
 docker build \
-    --file "${DOCKERFILE_PATH}" \
+    --file $(basename ${DOCKERFILE_PATH}) \
     --build-arg APPLICATION=${APPLICATION} \
     --build-arg BUILD_RFC3339=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
     --build-arg REVISION=$(git rev-parse --short HEAD) \
@@ -86,7 +90,7 @@ docker build \
     --build-arg DESCRIPTION="${DESCRIPTION}" \
     --build-arg VERSION=$(git describe --tags --always) \
     -t ${IMAGE_NAME}_${DEFAULT_ARCH} \
-    .
+    ${BUILD_PATH}.
 
 ## Push the default arch image so manifest-tool can find it
 docker push ${IMAGE_NAME}_${DEFAULT_ARCH}
