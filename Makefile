@@ -1,7 +1,5 @@
-include variables.mk
-
-# Only necessary for Go projects
-include go.mk
+include scripts/variables.mk
+include scripts/go.mk
 
 .PHONY: build all
 .DEFAULT_GOAL := all

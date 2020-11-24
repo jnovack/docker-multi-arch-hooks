@@ -9,6 +9,16 @@ GO_LDFLAGS := "-w -s \
 	-X github.com/jnovack/release.Version=${VERSION} \
 	"
 
+# go-test tests all your code
+.PHONY: go-test
+go-test:
+	go test -v ./... -race
+
+# go-coverage generates code coverage
+.PHONY: go-coverage
+go-coverage:
+	go test -v ./... -coverprofile=coverage.txt -covermode=atomic
+
 # go-build builds your flagship application
 .PHONY: go-build
 go-build:

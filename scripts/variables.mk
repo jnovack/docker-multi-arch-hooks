@@ -39,8 +39,8 @@ docker:
 
 # update-hooks downloads the newest version of any multi-arch hooks from the parent template repository
 update-hooks:
-	curl -Lo hooks/build https://github.com/jnovack/docker-multi-arch-hooks/raw/master/hooks/build
-	curl -Lo hooks/post_checkout https://github.com/jnovack/docker-multi-arch-hooks/raw/master/hooks/post_checkout
-	curl -Lo hooks/post_push https://github.com/jnovack/docker-multi-arch-hooks/raw/master/hooks/post_push
-	curl -Lo variables.mk https://github.com/jnovack/docker-multi-arch-hooks/raw/master/variables.mk
-	curl -Lo go.mk https://github.com/jnovack/docker-multi-arch-hooks/raw/master/go.mk
+	curl -Lo build/package/hooks/build https://github.com/jnovack/docker-multi-arch-hooks/raw/master/build/package/hooks/build
+	curl -Lo build/package/hooks/post_checkout https://github.com/jnovack/docker-multi-arch-hooks/raw/master/build/package/hooks/post_checkout
+	curl -Lo build/package/hooks/post_push https://github.com/jnovack/docker-multi-arch-hooks/raw/master/build/package/hooks/post_push
+	curl -Lo scripts/variables.mk https://github.com/jnovack/docker-multi-arch-hooks/raw/master/scripts/variables.mk
+	curl -Lo scripts/go.mk https://github.com/jnovack/docker-multi-arch-hooks/raw/master/scripts/go.mk
